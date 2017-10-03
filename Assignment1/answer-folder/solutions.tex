@@ -29,8 +29,6 @@
 	\section{}
 	Assume numbers are in decimal/base 10 unless indicated as otherwise, or written in their form (0000 0000 ... for binary and 0x... or with ABCDEF for hexadecimal).
 	
-	\paragraph{1.1}
-	
 		\subparagraph{.1}
 		We keep dividing by 2 until we get 0 and all the remainders are the binary number digits (or rather, bits) in order.
 		\begin{align*}
@@ -114,34 +112,34 @@
 		
 		\subparagraph{.12}
 		
-	\paragraph{1.2}
-	Number is positive so sign bit is 0.
-	Integer part is just 1 so $1 \times 2^0$, and adding the bias (+127) to the exponent 0, the exponent bits are $127 = (0111\ 1111)_{2}$.
-	For the fractional part,
-	\begin{align*}
-	1.00001\\
-	0.00001 * 2 &= 0.00002&\textnormal{with integer part 0}\\
-	...\\
-	0.32768 * 2 &= 0.65536&\textnormal{with integer part 0}\\
-	0.65536 * 2 &= 1.31072&\textnormal{with integer part 1}\\
-	0.31072 * 2 &= 0.62144&\textnormal{with integer part 0}\\
-	0.62144 * 2 &= 1.24288&\textnormal{with integer part 1}\\
-	0.24288 * 2 &= 0.48576&\textnormal{with integer part 0}\\
-	0.48576 * 2 &= 0.97152&\textnormal{with integer part 0}\\
-	0.97152 * 2 &= 1.94304&\textnormal{with integer part 1}\\
-	0.94304 * 2 &= 1.88608&\textnormal{with integer part 1}\\
-	0.88608 * 2 &= 1.77216&\textnormal{with integer part 1}\\
-	...\\
-	0. * 2 &= .&\textnormal{with integer part 0}\\
-	0. * 2 &= .&\textnormal{with integer part 1}\\
-	\\
-	&&(10\ 1110\ 0101)_2
-	\end{align*}
-	
-	
 	\section{}
 	
-		\subparagraph{a)}
-		.
+		\subparagraph{.1}
+		Number is positive so sign bit is 0.
+		Integer part is just 1 so $1 \times 2^0$, and adding the bias (+127) to the exponent 0, the exponent bits are $127 = (0111\ 1111)_{2}$.
+		For the fractional part,
+		\begin{align*}
+		1.00001\\
+		0.00001 * 2 &= 0.00002&\textnormal{with integer part 0}\\
+		&&...\textnormal{ (14 more zeroes)}\\
+		0.32768 * 2 &= 0.65536&\textnormal{with integer part 0}\\
+		0.65536 * 2 &= 1.31072&\textnormal{with integer part 1}\\
+		0.31072 * 2 &= 0.62144&\textnormal{with integer part 0}\\
+		0.62144 * 2 &= 1.24288&\textnormal{with integer part 1}\\
+		0.24288 * 2 &= 0.48576&\textnormal{with integer part 0}\\
+		0.48576 * 2 &= 0.97152&\textnormal{with integer part 0}\\
+		0.97152 * 2 &= 1.94304&\textnormal{with integer part 1}\\
+		0.94304 * 2 &= 1.88608&\textnormal{with integer part 1}\\
+		0.88608 * 2 &= 1.77216&\textnormal{with integer part 1}\\
+		&&...\textnormal{ (we stop as we've already passed 23 mantissa bits)}\\
+		0. * 2 &= .&\textnormal{with integer part 0}\\
+		0. * 2 &= .&\textnormal{with integer part 1}\\
+		\\
+		&&(0000\ 0000\ 0000\ 0000\ 1010\ 0111)_2
+		\end{align*}
+		Thus the IEEE floating point number representation with 1 sign bit, 8 exponent bits and 23 mantissa bits is:
+		\begin{center}
+		0 $\|$ 0111 1111 $\|$ 0000 0000 0000 0000 1010 0111
+		\end{center}
 		
 \end{document}
