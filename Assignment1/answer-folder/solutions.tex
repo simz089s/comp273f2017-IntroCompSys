@@ -27,8 +27,10 @@
 	\thispagestyle{fancy}
 	
 	\section{.1}
+	Assume numbers are in decimal/base 10 unless indicated as otherwise, or written in their form (0000 0000 ... for binary and 0x... or with ABCDEF for hexadecimal).
 	
 		\subparagraph{.1}
+		We keep dividing by 2 until we get 0 and all the remainders are the binary number digits (or rather, bits) in order.
 		\begin{align*}
 		741 / 2 &= 370&\textnormal{with remainder 1}\\
 		370 / 2 &= 185&\textnormal{with remainder 0}\\
@@ -40,21 +42,62 @@
 		  5 / 2 &=   2&\textnormal{with remainder 1}\\
 		  2 / 2 &=   1&\textnormal{with remainder 0}\\
 		  1 / 2 &=   0&\textnormal{with remainder 1}\\
-		&&(1011100101)_2
+		\\
+		&&(10 1110 0101)_2
 		\end{align*}
-        
-    	.
 		
-		\subparagraph{b)}
+		\subparagraph{.2}
+		As 16 is a multiple of 2, converting from binary to hexadecimal can be very convenient (1 digit base 16 = 4 bits), but here using the same technique to convert decimal to hexadecimal than we did with binary is sufficient. Instead of dividing by 2 we divide by 16. Thus the remainder can be any digit in the range 1, 2, ..., E, F which we use to get each digit of the converted number in base 16 in order, just like for binary.
+		\begin{align*}
+		741 / 16 &= 46&\textnormal{with remainder 5}\\
+		 46 / 16 &=  2&\textnormal{with remainder E}\\
+		  2 / 16 &=  0&\textnormal{with remainder 2}\\
+		\\
+		&&(2E5)_{16}\textnormal{ or 0x2e5}
+		\end{align*}
+		
+		\subparagraph{.3}
+		\begin{align*}
 		.
-		
-		\subparagraph{c)}
-		\begin{center}
-		
-		\end{center}
+		\end{align*}
 		
 		
-		\subparagraph{d)}
+		\subparagraph{.4}
+		
+		\subparagraph{.5}
+		In base 2, going through the bits from right to left, each bit represents a power of 2 in increasing order. Whether that position has a 1 or a 0 represent whether you "count" that multiple or not (or rather, multiply each bit with their positional value in base 10) and then add all of them together to get the number in base ten. This is just like how in base 10, rightmost digit position is 1, then 10, then 100, each being to next biggest power of the base. So the digit occupying the position is the number of times that values is counted (adding all the digits multiplied by their "positional value" or power of 10). This comes from positional notation.
+		Thus,
+		\begin{align*}
+		(100 1101)_2 &= (1 \times 64) + (0 \times 32) + (0 \times 16) + (1 \times 8) + (1 \times 4) + (0 \times 2) + (1 \times 1)\\
+		&= 77
+		\end{align*}
+		
+		\subparagraph{.6}
+		As said in 1.2, converting binary to hexadecimal can be very convenient, even though here going from decimal is also short. We apply the same principle as the previous conversion to decimal but here, instead of using all of the bits and adding them together, we can instead simply map each digit of the hexadecimal number to a nibble of the binary representation. Thus we can do the same operations as in the previous conversion, but instead we do it in base 16 in each nibble separately where they become a digit of the hexadecimal representation.
+		\begin{align*}
+		(0100 1101)_2 &= (\{1 \times 4\}\{(1 \times 1) + (1 \times 4) + (1 \times 8)\})_{16}\textnormal{ (using positional notation)}\\
+		&= 4D
+		\end{align*}
+		Comparing with the first way of repeated division and taking the remainder for converting using the result from 1.5:
+		\begin{align*}
+		77 / 16 &= 4&\textnormal{with remainder\;\;\:}&(13)_{10} = (D)_{16}\\
+		 4 / 16 &= 0&\textnormal{with remainder 4}&\\
+		\\
+		&&&(4D)_{16}
+		\end{align*}
+		The results match.
+		
+		\subparagraph{.7}
+		
+		\subparagraph{.8}
+		
+		\subparagraph{.9}
+		
+		\subparagraph{.10}
+		
+		\subparagraph{.11}
+		
+		\subparagraph{.12}
 		
 		
 	\section{}
