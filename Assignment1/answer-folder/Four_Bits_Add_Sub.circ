@@ -176,6 +176,7 @@ end TCL_Generic;&#13;
     <wire from="(130,180)" to="(180,180)"/>
     <wire from="(70,150)" to="(70,490)"/>
     <wire from="(150,280)" to="(150,300)"/>
+    <wire from="(220,720)" to="(450,720)"/>
     <wire from="(130,180)" to="(130,210)"/>
     <wire from="(760,550)" to="(760,700)"/>
     <wire from="(590,520)" to="(590,540)"/>
@@ -196,7 +197,6 @@ end TCL_Generic;&#13;
     <wire from="(550,680)" to="(560,680)"/>
     <wire from="(420,270)" to="(480,270)"/>
     <wire from="(560,180)" to="(560,450)"/>
-    <wire from="(220,340)" to="(340,340)"/>
     <wire from="(480,260)" to="(480,270)"/>
     <wire from="(260,280)" to="(260,290)"/>
     <wire from="(560,510)" to="(600,510)"/>
@@ -262,26 +262,11 @@ end TCL_Generic;&#13;
     <wire from="(580,90)" to="(580,150)"/>
     <wire from="(60,150)" to="(60,590)"/>
     <wire from="(50,310)" to="(50,690)"/>
-    <comp lib="0" loc="(170,90)" name="Pin">
-      <a name="width" val="4"/>
-      <a name="label" val="B"/>
-    </comp>
-    <comp lib="0" loc="(320,90)" name="Pin">
-      <a name="label" val="Add_Sub"/>
-    </comp>
-    <comp lib="1" loc="(160,280)" name="XNOR Gate">
+    <comp lib="1" loc="(550,680)" name="XOR Gate">
       <a name="facing" val="south"/>
+      <a name="label" val="sgn_B_eq_R"/>
     </comp>
-    <comp lib="1" loc="(210,280)" name="XNOR Gate">
-      <a name="facing" val="south"/>
-    </comp>
-    <comp lib="0" loc="(70,90)" name="Pin">
-      <a name="width" val="4"/>
-      <a name="label" val="A"/>
-    </comp>
-    <comp lib="1" loc="(110,280)" name="XNOR Gate">
-      <a name="facing" val="south"/>
-    </comp>
+    <comp loc="(260,680)" name="Add_1Bit"/>
     <comp lib="0" loc="(410,90)" name="Pin">
       <a name="facing" val="west"/>
       <a name="output" val="true"/>
@@ -289,66 +274,18 @@ end TCL_Generic;&#13;
       <a name="label" val="R"/>
       <a name="labelloc" val="east"/>
     </comp>
-    <comp lib="1" loc="(550,680)" name="XOR Gate">
-      <a name="facing" val="south"/>
-      <a name="label" val="sgn_B_eq_R"/>
-    </comp>
-    <comp lib="8" loc="(452,849)" name="Text">
-      <a name="text" val="DO NOT USE &quot;LOGISIM&quot; VERSION TO SOLVE THIS ASSIGNMENT!"/>
-      <a name="font" val="SansSerif plain 20"/>
-    </comp>
-    <comp lib="0" loc="(600,90)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-      <a name="label" val="Overflow"/>
-      <a name="labelloc" val="east"/>
-    </comp>
-    <comp lib="8" loc="(9,20)" name="Text">
-      <a name="text" val="Simon Zheng 260744353"/>
-      <a name="font" val="SansSerif plain 12"/>
-      <a name="halign" val="left"/>
-    </comp>
-    <comp lib="0" loc="(510,90)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="output" val="true"/>
-      <a name="label" val="Zero"/>
-      <a name="labelloc" val="east"/>
-    </comp>
-    <comp lib="1" loc="(460,210)" name="OR Gate">
-      <a name="facing" val="north"/>
-    </comp>
-    <comp lib="0" loc="(190,130)" name="Splitter">
-      <a name="facing" val="south"/>
-      <a name="fanout" val="4"/>
-      <a name="incoming" val="4"/>
-      <a name="appear" val="right"/>
-    </comp>
-    <comp loc="(260,380)" name="Add_1Bit"/>
-    <comp lib="1" loc="(670,530)" name="XNOR Gate"/>
     <comp lib="1" loc="(520,210)" name="OR Gate">
       <a name="facing" val="north"/>
     </comp>
-    <comp lib="0" loc="(410,40)" name="Probe">
-      <a name="facing" val="west"/>
-      <a name="radix" val="10signed"/>
-    </comp>
-    <comp lib="8" loc="(457,814)" name="Text">
-      <a name="text" val="YOU CAN FIND &quot;LOGISIM-EVOLUTION&quot; PROGRAM IN THE ASSIGNMENT'S FOLDER"/>
-      <a name="font" val="SansSerif plain 20"/>
-    </comp>
-    <comp lib="0" loc="(70,40)" name="Probe">
-      <a name="radix" val="10signed"/>
-    </comp>
-    <comp lib="1" loc="(570,550)" name="XNOR Gate">
-      <a name="label" val="sgn_A_eq_B"/>
-    </comp>
-    <comp lib="1" loc="(840,320)" name="XOR Gate"/>
-    <comp lib="8" loc="(455,780)" name="Text">
-      <a name="text" val="MAKE SURE THAT YOU OPENED THIS PROJECT IN &quot;LOGISIM-EVOLUTION&quot;"/>
-      <a name="font" val="SansSerif plain 20"/>
-    </comp>
-    <comp lib="1" loc="(260,280)" name="XNOR Gate">
+    <comp lib="1" loc="(500,680)" name="XOR Gate">
       <a name="facing" val="south"/>
+      <a name="label" val="sgn_A_eq_R"/>
+    </comp>
+    <comp lib="0" loc="(170,40)" name="Probe">
+      <a name="radix" val="10signed"/>
+    </comp>
+    <comp lib="1" loc="(460,210)" name="OR Gate">
+      <a name="facing" val="north"/>
     </comp>
     <comp lib="0" loc="(90,130)" name="Splitter">
       <a name="facing" val="south"/>
@@ -356,32 +293,95 @@ end TCL_Generic;&#13;
       <a name="incoming" val="4"/>
       <a name="appear" val="right"/>
     </comp>
-    <comp loc="(260,680)" name="Add_1Bit"/>
-    <comp lib="1" loc="(500,680)" name="XOR Gate">
-      <a name="facing" val="south"/>
-      <a name="label" val="sgn_A_eq_R"/>
+    <comp lib="1" loc="(570,550)" name="XNOR Gate">
+      <a name="label" val="sgn_A_eq_B"/>
     </comp>
+    <comp lib="1" loc="(110,280)" name="XNOR Gate">
+      <a name="facing" val="south"/>
+    </comp>
+    <comp lib="1" loc="(610,700)" name="OR Gate"/>
+    <comp lib="1" loc="(210,280)" name="XNOR Gate">
+      <a name="facing" val="south"/>
+    </comp>
+    <comp lib="8" loc="(452,849)" name="Text">
+      <a name="text" val="DO NOT USE &quot;LOGISIM&quot; VERSION TO SOLVE THIS ASSIGNMENT!"/>
+      <a name="font" val="SansSerif plain 20"/>
+    </comp>
+    <comp loc="(260,580)" name="Add_1Bit"/>
+    <comp lib="0" loc="(170,90)" name="Pin">
+      <a name="width" val="4"/>
+      <a name="label" val="B"/>
+    </comp>
+    <comp loc="(260,480)" name="Add_1Bit"/>
+    <comp lib="1" loc="(840,320)" name="XOR Gate"/>
+    <comp lib="1" loc="(670,530)" name="XNOR Gate"/>
+    <comp lib="0" loc="(410,40)" name="Probe">
+      <a name="facing" val="west"/>
+      <a name="radix" val="10signed"/>
+    </comp>
+    <comp loc="(260,380)" name="Add_1Bit"/>
     <comp lib="0" loc="(390,130)" name="Splitter">
       <a name="facing" val="south"/>
       <a name="fanout" val="4"/>
       <a name="incoming" val="4"/>
     </comp>
-    <comp loc="(260,480)" name="Add_1Bit"/>
     <comp lib="1" loc="(340,240)" name="NOT Gate">
       <a name="facing" val="south"/>
+    </comp>
+    <comp lib="1" loc="(260,280)" name="XNOR Gate">
+      <a name="facing" val="south"/>
+    </comp>
+    <comp lib="1" loc="(160,280)" name="XNOR Gate">
+      <a name="facing" val="south"/>
+    </comp>
+    <comp lib="0" loc="(600,90)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="label" val="Overflow"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="0" loc="(190,130)" name="Splitter">
+      <a name="facing" val="south"/>
+      <a name="fanout" val="4"/>
+      <a name="incoming" val="4"/>
+      <a name="appear" val="right"/>
+    </comp>
+    <comp lib="8" loc="(455,780)" name="Text">
+      <a name="text" val="MAKE SURE THAT YOU OPENED THIS PROJECT IN &quot;LOGISIM-EVOLUTION&quot;"/>
+      <a name="font" val="SansSerif plain 20"/>
     </comp>
     <comp lib="1" loc="(740,500)" name="AND Gate">
       <a name="facing" val="north"/>
       <a name="label" val="all_sgn_eq"/>
     </comp>
+    <comp lib="0" loc="(70,90)" name="Pin">
+      <a name="width" val="4"/>
+      <a name="label" val="A"/>
+    </comp>
+    <comp lib="0" loc="(320,90)" name="Pin">
+      <a name="label" val="Add_Sub"/>
+    </comp>
     <comp lib="1" loc="(490,150)" name="NOR Gate">
       <a name="facing" val="north"/>
     </comp>
-    <comp lib="0" loc="(170,40)" name="Probe">
+    <comp lib="8" loc="(9,20)" name="Text">
+      <a name="text" val="Simon Zheng 260744353"/>
+      <a name="font" val="SansSerif plain 12"/>
+      <a name="halign" val="left"/>
+    </comp>
+    <comp lib="0" loc="(70,40)" name="Probe">
       <a name="radix" val="10signed"/>
     </comp>
-    <comp lib="1" loc="(610,700)" name="OR Gate"/>
-    <comp loc="(260,580)" name="Add_1Bit"/>
+    <comp lib="8" loc="(457,814)" name="Text">
+      <a name="text" val="YOU CAN FIND &quot;LOGISIM-EVOLUTION&quot; PROGRAM IN THE ASSIGNMENT'S FOLDER"/>
+      <a name="font" val="SansSerif plain 20"/>
+    </comp>
+    <comp lib="0" loc="(510,90)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="output" val="true"/>
+      <a name="label" val="Zero"/>
+      <a name="labelloc" val="east"/>
+    </comp>
   </circuit>
   <circuit name="Add_1Bit">
     <a name="circuit" val="Add_1Bit"/>
@@ -400,10 +400,10 @@ end TCL_Generic;&#13;
       <rect height="3" stroke="none" width="10" x="120" y="89"/>
       <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="end" x="117" y="94">S</text>
       <rect height="9" stroke="none" width="2" x="89" y="121"/>
-      <circ-port height="10" pin="260,40" width="10" x="125" y="85"/>
       <circ-port height="8" pin="60,80" width="8" x="46" y="76"/>
-      <circ-port height="8" pin="60,120" width="8" x="46" y="96"/>
       <circ-port height="10" pin="260,80" width="10" x="85" y="125"/>
+      <circ-port height="8" pin="60,120" width="8" x="46" y="96"/>
+      <circ-port height="10" pin="260,40" width="10" x="125" y="85"/>
       <circ-port height="8" pin="60,40" width="8" x="86" y="46"/>
       <text fill="#404040" font-family="Dialog" font-size="12" text-anchor="end" x="102" y="117">Cout</text>
       <rect fill="none" height="61" stroke="#000000" stroke-width="2" width="60" x="60" y="59"/>
@@ -437,9 +437,8 @@ end TCL_Generic;&#13;
     <wire from="(60,120)" to="(70,120)"/>
     <wire from="(300,120)" to="(300,170)"/>
     <wire from="(80,80)" to="(90,80)"/>
-    <comp lib="8" loc="(457,814)" name="Text">
-      <a name="text" val="YOU CAN FIND &quot;LOGISIM-EVOLUTION&quot; PROGRAM IN THE ASSIGNMENT'S FOLDER"/>
-      <a name="font" val="SansSerif plain 20"/>
+    <comp lib="0" loc="(60,120)" name="Pin">
+      <a name="label" val="B"/>
     </comp>
     <comp lib="0" loc="(260,40)" name="Pin">
       <a name="facing" val="west"/>
@@ -447,18 +446,29 @@ end TCL_Generic;&#13;
       <a name="label" val="Sum"/>
       <a name="labelloc" val="east"/>
     </comp>
+    <comp lib="1" loc="(150,100)" name="XOR Gate"/>
+    <comp lib="1" loc="(240,70)" name="XOR Gate"/>
+    <comp lib="0" loc="(60,40)" name="Pin">
+      <a name="label" val="Cin"/>
+    </comp>
+    <comp lib="8" loc="(457,814)" name="Text">
+      <a name="text" val="YOU CAN FIND &quot;LOGISIM-EVOLUTION&quot; PROGRAM IN THE ASSIGNMENT'S FOLDER"/>
+      <a name="font" val="SansSerif plain 20"/>
+    </comp>
+    <comp lib="1" loc="(300,170)" name="OR Gate"/>
+    <comp lib="8" loc="(455,780)" name="Text">
+      <a name="text" val="MAKE SURE THAT YOU OPENED THIS PROJECT IN &quot;LOGISIM-EVOLUTION&quot;"/>
+      <a name="font" val="SansSerif plain 20"/>
+    </comp>
     <comp lib="8" loc="(452,849)" name="Text">
       <a name="text" val="DO NOT USE &quot;LOGISIM&quot; VERSION TO SOLVE THIS ASSIGNMENT!"/>
       <a name="font" val="SansSerif plain 20"/>
     </comp>
+    <comp lib="1" loc="(230,200)" name="AND Gate"/>
     <comp lib="0" loc="(60,80)" name="Pin">
       <a name="label" val="A"/>
     </comp>
-    <comp lib="0" loc="(60,40)" name="Pin">
-      <a name="label" val="Cin"/>
-    </comp>
-    <comp lib="1" loc="(150,100)" name="XOR Gate"/>
-    <comp lib="1" loc="(230,200)" name="AND Gate"/>
+    <comp lib="1" loc="(230,140)" name="AND Gate"/>
     <comp lib="0" loc="(260,80)" name="Pin">
       <a name="facing" val="west"/>
       <a name="output" val="true"/>
@@ -469,16 +479,6 @@ end TCL_Generic;&#13;
       <a name="text" val="Simon Zheng 260744353"/>
       <a name="font" val="SansSerif plain 12"/>
       <a name="halign" val="left"/>
-    </comp>
-    <comp lib="8" loc="(455,780)" name="Text">
-      <a name="text" val="MAKE SURE THAT YOU OPENED THIS PROJECT IN &quot;LOGISIM-EVOLUTION&quot;"/>
-      <a name="font" val="SansSerif plain 20"/>
-    </comp>
-    <comp lib="1" loc="(230,140)" name="AND Gate"/>
-    <comp lib="1" loc="(240,70)" name="XOR Gate"/>
-    <comp lib="1" loc="(300,170)" name="OR Gate"/>
-    <comp lib="0" loc="(60,120)" name="Pin">
-      <a name="label" val="B"/>
     </comp>
   </circuit>
 </project>
