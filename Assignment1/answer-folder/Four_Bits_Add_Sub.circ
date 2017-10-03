@@ -131,141 +131,94 @@ end TCL_Generic;&#13;
     <a name="circuitnamedbox" val="true"/>
     <a name="circuitvhdlpath" val=""/>
     <wire from="(410,150)" to="(410,280)"/>
-    <wire from="(670,550)" to="(720,550)"/>
     <wire from="(90,160)" to="(150,160)"/>
     <wire from="(150,150)" to="(150,160)"/>
-    <wire from="(180,180)" to="(230,180)"/>
-    <wire from="(480,520)" to="(480,530)"/>
-    <wire from="(550,520)" to="(590,520)"/>
+    <wire from="(220,620)" to="(220,630)"/>
+    <wire from="(280,200)" to="(280,210)"/>
     <wire from="(180,290)" to="(180,370)"/>
-    <wire from="(500,260)" to="(500,280)"/>
     <wire from="(420,270)" to="(420,480)"/>
-    <wire from="(540,260)" to="(540,290)"/>
-    <wire from="(150,300)" to="(450,300)"/>
     <wire from="(220,420)" to="(220,440)"/>
-    <wire from="(220,620)" to="(220,640)"/>
     <wire from="(110,280)" to="(150,280)"/>
-    <wire from="(340,180)" to="(340,210)"/>
-    <wire from="(180,180)" to="(180,210)"/>
-    <wire from="(440,570)" to="(480,570)"/>
-    <wire from="(340,90)" to="(340,180)"/>
-    <wire from="(490,580)" to="(530,580)"/>
+    <wire from="(480,240)" to="(480,270)"/>
     <wire from="(160,280)" to="(160,570)"/>
-    <wire from="(50,150)" to="(50,310)"/>
-    <wire from="(580,540)" to="(580,580)"/>
-    <wire from="(400,190)" to="(400,290)"/>
     <wire from="(580,90)" to="(600,90)"/>
-    <wire from="(540,450)" to="(560,450)"/>
     <wire from="(90,90)" to="(90,130)"/>
-    <wire from="(570,550)" to="(600,550)"/>
+    <wire from="(340,90)" to="(340,200)"/>
     <wire from="(170,40)" to="(190,40)"/>
     <wire from="(260,580)" to="(410,580)"/>
     <wire from="(140,170)" to="(160,170)"/>
-    <wire from="(150,300)" to="(150,670)"/>
     <wire from="(240,160)" to="(240,210)"/>
-    <wire from="(490,530)" to="(500,530)"/>
-    <wire from="(450,450)" to="(460,450)"/>
-    <wire from="(400,290)" to="(540,290)"/>
-    <wire from="(490,530)" to="(490,580)"/>
+    <wire from="(600,210)" to="(600,720)"/>
     <wire from="(490,90)" to="(490,150)"/>
     <wire from="(430,260)" to="(430,380)"/>
-    <wire from="(580,540)" to="(590,540)"/>
-    <wire from="(580,580)" to="(590,580)"/>
-    <wire from="(550,190)" to="(550,520)"/>
+    <wire from="(280,200)" to="(340,200)"/>
     <wire from="(180,150)" to="(180,160)"/>
-    <wire from="(130,180)" to="(180,180)"/>
+    <wire from="(230,200)" to="(230,210)"/>
+    <wire from="(220,630)" to="(220,640)"/>
+    <wire from="(400,150)" to="(400,290)"/>
+    <wire from="(230,200)" to="(280,200)"/>
+    <wire from="(490,180)" to="(490,190)"/>
+    <wire from="(470,240)" to="(470,260)"/>
     <wire from="(70,150)" to="(70,490)"/>
-    <wire from="(150,280)" to="(150,300)"/>
-    <wire from="(220,720)" to="(450,720)"/>
-    <wire from="(130,180)" to="(130,210)"/>
-    <wire from="(760,550)" to="(760,700)"/>
-    <wire from="(590,520)" to="(590,540)"/>
-    <wire from="(530,580)" to="(530,620)"/>
-    <wire from="(610,700)" to="(760,700)"/>
     <wire from="(430,150)" to="(430,260)"/>
     <wire from="(490,90)" to="(510,90)"/>
     <wire from="(170,90)" to="(190,90)"/>
     <wire from="(170,170)" to="(190,170)"/>
+    <wire from="(220,630)" to="(560,630)"/>
     <wire from="(190,40)" to="(190,90)"/>
     <wire from="(260,680)" to="(400,680)"/>
-    <wire from="(480,530)" to="(490,530)"/>
     <wire from="(180,290)" to="(260,290)"/>
-    <wire from="(560,450)" to="(560,510)"/>
-    <wire from="(480,570)" to="(480,620)"/>
+    <wire from="(510,240)" to="(510,290)"/>
     <wire from="(390,40)" to="(390,90)"/>
     <wire from="(170,280)" to="(170,470)"/>
-    <wire from="(550,680)" to="(560,680)"/>
     <wire from="(420,270)" to="(480,270)"/>
-    <wire from="(560,180)" to="(560,450)"/>
-    <wire from="(480,260)" to="(480,270)"/>
+    <wire from="(220,720)" to="(600,720)"/>
+    <wire from="(180,200)" to="(180,210)"/>
+    <wire from="(220,340)" to="(340,340)"/>
+    <wire from="(180,200)" to="(230,200)"/>
     <wire from="(260,280)" to="(260,290)"/>
-    <wire from="(560,510)" to="(600,510)"/>
+    <wire from="(340,200)" to="(340,210)"/>
     <wire from="(260,380)" to="(430,380)"/>
-    <wire from="(700,490)" to="(740,490)"/>
+    <wire from="(400,290)" to="(510,290)"/>
     <wire from="(170,150)" to="(170,170)"/>
-    <wire from="(570,590)" to="(570,620)"/>
     <wire from="(220,520)" to="(220,540)"/>
     <wire from="(170,280)" to="(210,280)"/>
-    <wire from="(280,180)" to="(280,210)"/>
-    <wire from="(670,530)" to="(670,550)"/>
-    <wire from="(700,150)" to="(700,490)"/>
+    <wire from="(50,150)" to="(50,690)"/>
+    <wire from="(430,260)" to="(470,260)"/>
     <wire from="(150,670)" to="(180,670)"/>
     <wire from="(410,280)" to="(500,280)"/>
-    <wire from="(340,180)" to="(560,180)"/>
     <wire from="(320,90)" to="(340,90)"/>
-    <wire from="(450,300)" to="(450,410)"/>
     <wire from="(390,40)" to="(410,40)"/>
     <wire from="(190,90)" to="(190,130)"/>
     <wire from="(190,170)" to="(190,210)"/>
-    <wire from="(480,570)" to="(500,570)"/>
     <wire from="(70,40)" to="(90,40)"/>
     <wire from="(390,90)" to="(390,130)"/>
     <wire from="(160,570)" to="(180,570)"/>
-    <wire from="(500,680)" to="(500,720)"/>
+    <wire from="(500,240)" to="(500,280)"/>
     <wire from="(80,150)" to="(80,390)"/>
-    <wire from="(510,210)" to="(520,210)"/>
     <wire from="(170,470)" to="(180,470)"/>
-    <wire from="(50,310)" to="(440,310)"/>
     <wire from="(420,150)" to="(420,270)"/>
     <wire from="(50,690)" to="(180,690)"/>
-    <wire from="(280,180)" to="(340,180)"/>
     <wire from="(400,290)" to="(400,680)"/>
-    <wire from="(580,150)" to="(700,150)"/>
-    <wire from="(740,490)" to="(740,500)"/>
-    <wire from="(440,310)" to="(440,570)"/>
-    <wire from="(590,580)" to="(590,590)"/>
-    <wire from="(500,720)" to="(560,720)"/>
+    <wire from="(150,280)" to="(150,670)"/>
     <wire from="(180,160)" to="(240,160)"/>
-    <wire from="(520,590)" to="(570,590)"/>
+    <wire from="(130,200)" to="(130,210)"/>
     <wire from="(60,590)" to="(180,590)"/>
-    <wire from="(230,180)" to="(280,180)"/>
-    <wire from="(450,440)" to="(450,450)"/>
+    <wire from="(130,200)" to="(180,200)"/>
     <wire from="(70,490)" to="(180,490)"/>
     <wire from="(160,150)" to="(160,170)"/>
-    <wire from="(520,590)" to="(520,620)"/>
     <wire from="(80,390)" to="(180,390)"/>
-    <wire from="(230,180)" to="(230,210)"/>
     <wire from="(340,240)" to="(340,340)"/>
     <wire from="(260,480)" to="(420,480)"/>
-    <wire from="(570,590)" to="(590,590)"/>
     <wire from="(390,90)" to="(410,90)"/>
     <wire from="(410,280)" to="(410,580)"/>
     <wire from="(140,170)" to="(140,210)"/>
-    <wire from="(400,190)" to="(550,190)"/>
+    <wire from="(560,210)" to="(560,630)"/>
     <wire from="(70,90)" to="(90,90)"/>
-    <wire from="(400,150)" to="(400,190)"/>
-    <wire from="(430,260)" to="(440,260)"/>
-    <wire from="(460,210)" to="(470,210)"/>
-    <wire from="(500,450)" to="(510,450)"/>
     <wire from="(90,40)" to="(90,90)"/>
     <wire from="(90,160)" to="(90,210)"/>
     <wire from="(580,90)" to="(580,150)"/>
     <wire from="(60,150)" to="(60,590)"/>
-    <wire from="(50,310)" to="(50,690)"/>
-    <comp lib="1" loc="(550,680)" name="XOR Gate">
-      <a name="facing" val="south"/>
-      <a name="label" val="sgn_B_eq_R"/>
-    </comp>
     <comp loc="(260,680)" name="Add_1Bit"/>
     <comp lib="0" loc="(410,90)" name="Pin">
       <a name="facing" val="west"/>
@@ -274,17 +227,10 @@ end TCL_Generic;&#13;
       <a name="label" val="R"/>
       <a name="labelloc" val="east"/>
     </comp>
-    <comp lib="1" loc="(520,210)" name="OR Gate">
-      <a name="facing" val="north"/>
-    </comp>
-    <comp lib="1" loc="(500,680)" name="XOR Gate">
-      <a name="facing" val="south"/>
-      <a name="label" val="sgn_A_eq_R"/>
-    </comp>
     <comp lib="0" loc="(170,40)" name="Probe">
       <a name="radix" val="10signed"/>
     </comp>
-    <comp lib="1" loc="(460,210)" name="OR Gate">
+    <comp lib="1" loc="(580,150)" name="XOR Gate">
       <a name="facing" val="north"/>
     </comp>
     <comp lib="0" loc="(90,130)" name="Splitter">
@@ -293,13 +239,9 @@ end TCL_Generic;&#13;
       <a name="incoming" val="4"/>
       <a name="appear" val="right"/>
     </comp>
-    <comp lib="1" loc="(570,550)" name="XNOR Gate">
-      <a name="label" val="sgn_A_eq_B"/>
-    </comp>
     <comp lib="1" loc="(110,280)" name="XNOR Gate">
       <a name="facing" val="south"/>
     </comp>
-    <comp lib="1" loc="(610,700)" name="OR Gate"/>
     <comp lib="1" loc="(210,280)" name="XNOR Gate">
       <a name="facing" val="south"/>
     </comp>
@@ -313,8 +255,6 @@ end TCL_Generic;&#13;
       <a name="label" val="B"/>
     </comp>
     <comp loc="(260,480)" name="Add_1Bit"/>
-    <comp lib="1" loc="(840,320)" name="XOR Gate"/>
-    <comp lib="1" loc="(670,530)" name="XNOR Gate"/>
     <comp lib="0" loc="(410,40)" name="Probe">
       <a name="facing" val="west"/>
       <a name="radix" val="10signed"/>
@@ -350,10 +290,6 @@ end TCL_Generic;&#13;
       <a name="text" val="MAKE SURE THAT YOU OPENED THIS PROJECT IN &quot;LOGISIM-EVOLUTION&quot;"/>
       <a name="font" val="SansSerif plain 20"/>
     </comp>
-    <comp lib="1" loc="(740,500)" name="AND Gate">
-      <a name="facing" val="north"/>
-      <a name="label" val="all_sgn_eq"/>
-    </comp>
     <comp lib="0" loc="(70,90)" name="Pin">
       <a name="width" val="4"/>
       <a name="label" val="A"/>
@@ -361,8 +297,9 @@ end TCL_Generic;&#13;
     <comp lib="0" loc="(320,90)" name="Pin">
       <a name="label" val="Add_Sub"/>
     </comp>
-    <comp lib="1" loc="(490,150)" name="NOR Gate">
+    <comp lib="1" loc="(490,190)" name="AND Gate">
       <a name="facing" val="north"/>
+      <a name="inputs" val="4"/>
     </comp>
     <comp lib="8" loc="(9,20)" name="Text">
       <a name="text" val="Simon Zheng 260744353"/>
@@ -371,6 +308,9 @@ end TCL_Generic;&#13;
     </comp>
     <comp lib="0" loc="(70,40)" name="Probe">
       <a name="radix" val="10signed"/>
+    </comp>
+    <comp lib="1" loc="(490,150)" name="NOT Gate">
+      <a name="facing" val="north"/>
     </comp>
     <comp lib="8" loc="(457,814)" name="Text">
       <a name="text" val="YOU CAN FIND &quot;LOGISIM-EVOLUTION&quot; PROGRAM IN THE ASSIGNMENT'S FOLDER"/>
