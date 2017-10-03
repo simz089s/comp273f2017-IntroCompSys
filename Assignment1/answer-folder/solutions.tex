@@ -43,7 +43,7 @@
 		  2 / 2 &=   1&\textnormal{with remainder 0}\\
 		  1 / 2 &=   0&\textnormal{with remainder 1}\\
 		\\
-		&&(10 1110 0101)_2
+		&&(10\ 1110\ 0101)_2
 		\end{align*}
 		
 		\subparagraph{.2}
@@ -68,17 +68,17 @@
 		In base 2, going through the bits from right to left, each bit represents a power of 2 in increasing order. Whether that position has a 1 or a 0 represent whether you "count" that multiple or not (or rather, multiply each bit with their positional value in base 10) and then add all of them together to get the number in base ten. This is just like how in base 10, rightmost digit position is 1, then 10, then 100, each being to next biggest power of the base. So the digit occupying the position is the number of times that values is counted (adding all the digits multiplied by their "positional value" or power of 10). This comes from positional notation.
 		Thus,
 		\begin{align*}
-		(100 1101)_2 &= (1 \times 64) + (0 \times 32) + (0 \times 16) + (1 \times 8) + (1 \times 4) + (0 \times 2) + (1 \times 1)\\
+		(100\ 1101)_2 &= (1 \times 64) + (0 \times 32) + (0 \times 16) + (1 \times 8) + (1 \times 4) + (0 \times 2) + (1 \times 1)\\
 		&= 77
 		\end{align*}
 		
 		\subparagraph{.6}
-		As said in 1.2, converting binary to hexadecimal can be very convenient, even though here going from decimal is also short. We apply the same principle as the previous conversion to decimal but here, instead of using all of the bits and adding them together, we can instead simply map each digit of the hexadecimal number to a nibble of the binary representation. Thus we can do the same operations as in the previous conversion, but instead we do it in base 16 in each nibble separately where they become a digit of the hexadecimal representation.
+		As said in 1.1.2, converting binary to hexadecimal can be very convenient, even though here going from decimal is also short. We apply the same principle as the previous conversion to decimal but here, instead of using all of the bits and adding them together, we can instead simply map each digit of the hexadecimal number to a nibble of the binary representation. Thus we can do the same operations as in the previous conversion, but instead we do it in base 16 in each nibble separately where they become a digit of the hexadecimal representation.
 		\begin{align*}
-		(0100 1101)_2 &= (\{1 \times 4\}\{(1 \times 1) + (1 \times 4) + (1 \times 8)\})_{16}\textnormal{ (using positional notation)}\\
+		(0100\ 1101)_2 &= (\{1 \times 4\}\{(1 \times 1) + (1 \times 4) + (1 \times 8)\})_{16}\textnormal{ (using positional notation)}\\
 		&= 4D
 		\end{align*}
-		Comparing with the first way of repeated division and taking the remainder for converting using the result from 1.5:
+		Comparing with the first way of repeated division and taking the remainder for converting using the result from 1.1.5:
 		\begin{align*}
 		77 / 16 &= 4&\textnormal{with remainder\;\;\:}&(13)_{10} = (D)_{16}\\
 		 4 / 16 &= 0&\textnormal{with remainder 4}&\\
@@ -92,8 +92,21 @@
 		\subparagraph{.8}
 		
 		\subparagraph{.9}
+		We can just do the opposite of 1.1.6, and it is very easy using positional notation as each digit only goes from 1 to F so 16 possibilities, 4 bits.
+		\begin{align*}
+		(F)_{16} = (1111)_2\\
+		(0)_{16} = (0000)_2\\
+		(D)_{16} = (1101)_2\\
+		\end{align*}
+		Thus $(F00D)_{16} = (1111\ 0000\ 0000\ 1101)_2$.
 		
 		\subparagraph{.10}
+		Here again we simply make use of positional notation except in base 16 (powers of 16) to get the delicious conversion:
+		\begin{align*}
+		(F00D)_16 &= ((F)_{16} \times 4096) + ((0)_{16} \times 256) + ((0)_{16} \times 16) + ((D)_{16} \times 1)\\
+		&= (15 \times 4096) + (0 \times 256) + (0 \times 16) + (13 \times 1)\\
+		&= 61 453
+		\end{align*}
 		
 		\subparagraph{.11}
 		
