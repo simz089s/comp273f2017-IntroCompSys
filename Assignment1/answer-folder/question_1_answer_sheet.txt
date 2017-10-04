@@ -4,7 +4,7 @@
 ##### Also, do not edit the structure of this file.        			 																  	 #####
 ##### If you require to explain something regarding your answers, add an explanation typeset- or handwritten-file to your answer-folder. #####
 
-Q1.1.1: 1011100101
+Q1.1.1: 10 1110 0101
 
 Q1.1.2: 0x2E5
 
@@ -20,7 +20,7 @@ Q1.1.7:
 
 Q1.1.8:
 
-Q1.1.9: 1111000000001101
+Q1.1.9: 1111 0000 0000 1101
 
 Q1.1.10: 61453
 
