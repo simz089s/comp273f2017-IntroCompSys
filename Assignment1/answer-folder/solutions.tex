@@ -104,8 +104,20 @@
 		The results match.
 		
 		\subparagraph{.7}
+		Once again, just like we transformed dividing by two into multiplying by two for the fractional part to convert from decimal to binary, here we can also use positional notation to convert binary to decimal. Since we're working in fractional values, each position from left to right is a power of $2^{-i}$ where $i$ is the position from the point.
+		\begin{align*}
+		(0.101011)_2 &= 0 + (2^{-1}) + (2^{-3}) + (2^{-5}) + (2^{-6})\\
+		&= (0.671875)_{10}
+		\end{align*}
 		
 		\subparagraph{.8}
+		For hexadecimal we just do the same thing as usual when converting from binary.
+		\begin{align*}
+		(0.101011)_2 &= 0.\{(1010)_2\}\{(1100)_2\}\\
+		&= 0.\{(1 \times 8) + (0 \times 4) + (1 \times 2) + (0 \times 1)\}\{(1 \times 8) + (1 \times 4)\}\\
+		&= 0.AC
+		\end{align*}
+		As 0 is still 0 in hexadecimal.
 		
 		\subparagraph{.9}
 		We can just do the opposite of 1.1.6, and it is very easy using positional notation as each digit only goes from 1 to F so 16 possibilities, 4 bits.
