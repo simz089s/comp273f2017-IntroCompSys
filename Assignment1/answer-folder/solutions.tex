@@ -57,12 +57,28 @@
 		\end{align*}
 		
 		\subparagraph{.3}
-		\begin{align*}
-		.
-		\end{align*}
+		For fractional numbers, we calculate the integer part as previously done, and the fractional part separately. For the latter, instead of dividing we multiply by 2 and we always take the integer part (1 or 0) as a bit in order. Though when multiplying each time, we only keep the fractional part.
 		
+		We then just put the converted integer part to the left of the point and the fractional part to the right, exactly like the original number.
+		\begin{align*}
+		0.3515625 * 2 &= 0.703125&\textnormal{with integer part 0}\\
+		0.703125  * 2 &= 1.40625 &\textnormal{with integer part 1}\\
+		0.40625   * 2 &= 0.8125  &\textnormal{with integer part 0}\\
+		0.8125    * 2 &= 1.625   &\textnormal{with integer part 1}\\
+		0.625     * 2 &= 1.25    &\textnormal{with integer part 1}\\
+		0.25      * 2 &= 0.5     &\textnormal{with integer part 0}\\
+		0.5       * 2 &= 1       &\textnormal{with integer part 1}\\
+		\end{align*}
+		The integer part is obviously just 1. Thus, we get $(1.0101101)_2$.
 		
 		\subparagraph{.4}
+		Same thing but with 16. Integer part 1 is still 1, fractional is:
+		\begin{align*}
+		0.3515625 * 16 &= 5.625&\textnormal{with integer part }&5\\
+		5.625     * 16 &= 10   &\textnormal{with integer part }&10\\
+		\\
+		(1.5A)_{16}&&(\ (10)_{10} = (A)_{16}\ )&\\
+		\end{align*}
 		
 		\subparagraph{.5}
 		In base 2, going through the bits from right to left, each bit represents a power of 2 in increasing order. Whether that position has a 1 or a 0 represent whether you "count" that multiple or not (or rather, multiply each bit with their positional value in base 10) and then add all of them together to get the number in base ten. This is just like how in base 10, rightmost digit position is 1, then 10, then 100, each being to next biggest power of the base. So the digit occupying the position is the number of times that values is counted (adding all the digits multiplied by their "positional value" or power of 10). This comes from positional notation.
