@@ -11,7 +11,7 @@ main:     		# indicates start of code to test lcm the procedure
 																	                    
 																	                    																	                    
 																	                    																	                    																	                    																	                    
-gcd:	     		# the "lcm" procedure
+gcd:	     		# the "gcd" procedure
 
 
 
