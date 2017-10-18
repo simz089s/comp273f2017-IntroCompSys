@@ -7,15 +7,15 @@ second: .word 15    	# the second integer
 	.text		# instructions follow this line	
 																	                    
 main:     		# indicates start of code to test lcm the procedure
-	la $t0,first		# Load "first" and "second"
-	la $t1,second		# pseudo-instructions
-	lw $a0,0($t0)		# Put "first" and "second" as arguments
-	lw $a1,0($t1)		# for "lcm" procedure
+	la $s0,first		# Load "first" and "second"
+	la $s1,second		# pseudo-instructions
+	lw $a0,0($s0)		# Put "first" and "second" as arguments
+	lw $a1,0($s1)		# for "lcm" procedure
 	jal lcm			# Call to "lcm" procedure
 	
-	add $s0,$v0,$zero	# Get "lcm" result
+	add $s2,$v0,$zero	# Get "lcm" result
 	
-	add $a0,$s0,$zero	# Put result into syscall argument
+	add $a0,$s2,$zero	# Put result into syscall argument
 	li $v0,1		# Print int syscall
 	syscall
 
