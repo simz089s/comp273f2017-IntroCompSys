@@ -13,9 +13,9 @@ main:     		# indicates start of code to test lcm the procedure
 	lw $a1,0($t1)		# for "lcm" procedure
 	jal lcm			# Call to "lcm" procedure
 	
-	add $s2,$v0,$zero	# Get "lcm" result
+	add $s0,$v0,$zero	# Get "lcm" result
 	
-	add $a0,$s2,$zero	# Put result into syscall argument
+	add $a0,$s0,$zero	# Put result into syscall argument
 	li $v0,1		# Print int syscall
 	syscall
 
@@ -23,12 +23,12 @@ main:     		# indicates start of code to test lcm the procedure
 	syscall
 
 lcm:	     		# the "lcm" procedure
-	add $s0,$a0,$zero	# "a"	Put arguments into saved registers (used through entire procedure)
-	add $s1,$a1,$zero	# "b"	More efficient if the bigger number (assuming "a") is the one that keeps getting added
+	add $t0,$a0,$zero	# "a"	Put arguments into saved registers (used through entire procedure)
+	add $t1,$a1,$zero	# "b"	More efficient if the bigger number (assuming "a") is the one that keeps getting added
 	add $t2,$zero,$zero	# Register with result to be returned "initialized" as 0
 	
-Loop:	add $t2,$t2,$s0		# Add "a" to result
-	div $t2,$s1		# Divide result by "b"
+Loop:	add $t2,$t2,$t0		# Add "a" to result
+	div $t2,$t1		# Divide result by "b"
 	mfhi $t3		# Put remainder in $t3
 	bne $t3,$zero,Loop	# If remainder is 0 then result is divisible by "b" and we're done else loop
 	
