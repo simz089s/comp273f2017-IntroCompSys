@@ -15,11 +15,11 @@ main:     		# indicates start of code to test "upper" the procedure
 	li $v0,8		# Read string
 	syscall
 	
-	add $s0,$a0,$zero	# Save string address in $s0
-	jal upper
+	add $s0,$a0,$zero	# Save original string address into $s0
+	jal upper		# Call "upper" procedure
 	
-	la $a0,0($s0)
-	li $v0,4
+	la $a0,0($s0)		# Put changed string as print syscall argument
+	li $v0,4		# Print string
 	syscall
 	
 	li $v0,10		# Exit
@@ -27,16 +27,26 @@ main:     		# indicates start of code to test "upper" the procedure
 
 upper:	     			# the "upper" procedure
 	add $t0,$a0,$zero	# Put argument string address into temporary address
-	addi $t0,$t0,1		# Start at the next char
+	
+	lb $t1,0($t0)		# Load first character from string address into $t1
+	blt $t1,97,Incr		# Special case for the first char
+	bgt $t1,122,Incr	# which is not preceded by a space
+	addi $t1,$t1,-32	# This part is identical to the Loop body
+	sb $t1,0($t0)		# Refer to comments there
+	
 Loop:	lb $t1,0($t0)		# Load first character from string address into $t1
+	beq $t1,0,Done		# End procedure when null byte reached
 	lb $t2,-1($t0)		# Load previous char into $t2
 	
 	bne $t2,32,Incr		# If prev char is not space then skip else check if lower case letter
-	bl
+	blt $t1,97,Incr		# If current char is not a lower case letter then skip
+	bgt $t1,122,Incr
+	addi $t1,$t1,-32	# To upper case
+	sb $t1,0($t0)		# Store capitalised letter back into string
 	
 Incr:	addi $t0,$t0,1		# Increment string address
 	j Loop
 
-
+Done:	jr $ra
 									
 # End of program
