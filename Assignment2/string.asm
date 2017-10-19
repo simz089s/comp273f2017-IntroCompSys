@@ -11,7 +11,7 @@ main:     		# indicates start of code to test "upper" the procedure
 	li $v0,4
 	syscall
 	
-	la $a1,127		# Max 127 characters
+	la $a1,128		# Max 127 characters and null terminating char
 	li $v0,8		# Read string
 	syscall
 	
@@ -27,11 +27,11 @@ main:     		# indicates start of code to test "upper" the procedure
 
 upper:	     			# the "upper" procedure
 	add $t0,$a0,$zero	# Put argument string address into temporary address
+	addi $t0,$t0,1		# Start at the next char
 Loop:	lb $t1,0($t0)		# Load first character from string address into $t1
+	lb $t2,-1($t0)		# Load previous char into $t2
 	
-	bne $t1,32,Incr		# If char is not space then skip
-	addi $t0,$t0,1		# Increment string address to next char
-	lb $t1,0($t0)		# Load character in $t1
+	bne $t2,32,Incr		# If prev char is not space then skip else check if lower case letter
 	bl
 	
 Incr:	addi $t0,$t0,1		# Increment string address
