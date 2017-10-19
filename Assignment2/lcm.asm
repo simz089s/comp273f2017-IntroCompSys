@@ -23,7 +23,7 @@ main:     		# indicates start of code to test lcm the procedure
 	syscall
 
 lcm:	     		# the "lcm" procedure
-	add $t0,$a0,$zero	# "a"	Put arguments into saved registers (used through entire procedure)
+	add $t0,$a0,$zero	# "a"	Put arguments into temporary registers
 	add $t1,$a1,$zero	# "b"	More efficient if the bigger number (assuming "a") is the one that keeps getting added
 	add $t2,$zero,$zero	# Register with result to be returned "initialized" as 0
 	
