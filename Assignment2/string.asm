@@ -15,9 +15,9 @@ main:     		# indicates start of code to test "upper" the procedure
 	li $v0,8		# Read string
 	syscall
 	
-	add $s0,$a0,$zero	# Save original string address into $s0
-	jal upper		# Call "upper" procedure
+	jal upper		# Call "upper" procedure with string address already in $a0 from read
 	
+	add $s0,$v0,$zero	# Save return string address (may be a bit be redundant)
 	la $a0,0($s0)		# Put changed string as print syscall argument
 	li $v0,4		# Print string
 	syscall
@@ -26,7 +26,8 @@ main:     		# indicates start of code to test "upper" the procedure
 	syscall
 
 upper:	     			# the "upper" procedure
-	add $t0,$a0,$zero	# Put argument string address into temporary address
+	add $s0,$a0,$zero	# Save original string address into $s0
+	add $t0,$s0,$zero	# Put argument string address into temporary address
 	
 	lb $t1,0($t0)		# Load first character from string address into $t1
 	blt $t1,97,Incr		# Special case for the first char
@@ -47,6 +48,7 @@ Loop:	lb $t1,0($t0)		# Load first character from string address into $t1
 Incr:	addi $t0,$t0,1		# Increment string address
 	j Loop
 
-Done:	jr $ra
+Done:	add $v0,$s0,$zero	# Return original string address
+	jr $ra
 									
 # End of program
