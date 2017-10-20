@@ -36,20 +36,19 @@ main:     		# indicates start of code to test lcm the procedure
 																	                    																	                    
 																	                    																	                    																	                    																	                    
 gcd:	     		# the "gcd" procedure
-Base:	bne $a0,$a1,Start	# If a = b
-	add $v0,$a0,$zero	# return a
+	add $t0,$a0,$zero	# Put first int argument "a" into temp register
+	add $t1,$a1,$zero	# Same for "b"
+	
+Base:	bne $t0,$t1,Start	# If a != b go to Start
+	add $v0,$t0,$zero	# else return a
 	j End
 	
-Start:	add $t0,$a0,$zero	# Put first int argument "a" into temp register
-	add $t1,$a1,$zero	# Same for "b"
-	xor $t2,$t2,$t2		# Register with result to be returned
-	
-	addi $sp,$sp,-12	# Add space on stack for three words, a b and $ra
+Start:	addi $sp,$sp,-12	# Add space on stack for three words, a b and $ra
 	sw $ra,8($sp)		# Store $ra first
 	sw $t1,4($sp)		# Store "b" second
 	sw $t0,0($sp)		# Store "a" third
 	
-Elif:	ble $t1,$t0,Else	# Else if a > b
+Elif:	blt $t0,$t1,Else	# Else if a > b
 	
 	sub $a0,$t0,$t1		# $a1 is already "b" and new $a0 is now "a-b"
 	jal gcd			# Recursive call
@@ -59,10 +58,10 @@ Elif:	ble $t1,$t0,Else	# Else if a > b
 Else:	sub $a1,$t1,$t0		# $a0 is already "a" and new $a1 is now "b-a"
 	jal gcd			# Recursive call
 	
-RecEnd:	addi $sp,$sp,12		# Move stack pointer back for three words, a b and $ra
-	lw $t0,0($sp)		# Load "a" first
+RecEnd:	lw $t0,0($sp)		# Load "a" first
 	lw $t1,4($sp)		# Load "b" second
 	lw $ra,8($sp)		# Load $ra third
+	addi $sp,$sp,12		# Move stack pointer back
 	
 End:	jr $ra			# Return from call
 									
