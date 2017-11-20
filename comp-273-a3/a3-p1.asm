@@ -19,7 +19,7 @@ main:
 #build a linked list
 	jal build		# Build list
 	add $s0, $zero, $v1	# Move returned head address into $s0
-
+	
 #print "Original linked list\n"
 	li $v0, 4
 	la $a0, original
@@ -29,12 +29,23 @@ main:
 	jal print
 
 #reverse the linked list
+	add $s0, $zero, $a1	# Pass head address as argument to reverse
+	jal reverse
+	add $s0, $zero, $v1	# Store returned address of reversed head into $s0
+	
 #On a new line, print "reversed linked list\n"
+	li $v0, 4
+	la $a0, reversed
+	syscall
 #print the reversed linked list
+	add $a0, $zero, $s0	# Move head address into $a0 for print
+	jal print
 
 #terminate program
-	li $v0, 10
+End:	li $v0, 10
 	syscall
+
+###############################################################################
 
 malloc:
 	li $v0, 9	# Malloc num of bytes already in $a0
@@ -87,6 +98,8 @@ Tail:	li $v0, 12		# Read a character
 
 Done1:	add $v1, $zero, $s0	# Return head address with $v1
 	jr $ra
+	
+###############################################################################
 
 print:
 #$a0 takes the address of the first node
@@ -115,7 +128,27 @@ Rest1:	lb $t0, 0($t1)		# Load character into $t0
 	
 Done2:	jr $ra
 
+###############################################################################
+
 reverse:
 #$a1 takes the address of the first node of a linked list
+	
+				# $t0 is previous node address, $t1 is current node address, $t2 is next node address
+	
+	add $t1, $zero, $a1	# Start with first head node as current node
+	or $t0, $zero, $zero	# and null as previous node
+	
 #reverses all the pointers in the linked list
+Loop:	beq $t1, $zero, Done3	# If current node is null then finish
+	
+	lw $t2, 4($t1)		# Save next node address into $t2
+	sw $t0, 4($t1)		# Put saved address of previous node as new next node
+	
+	add $t0, $zero, $t1	# Set current node as new previous node
+	add $t1, $zero, $t2	# Go to next node (set next node as new current node)
+	
+	j Loop
+
 #$v1 returns the address
+Done3:	add $v1, $zero, $t0	# At this point $t0 stores the address of the last node which is the head of reversed list
+	jr $ra
