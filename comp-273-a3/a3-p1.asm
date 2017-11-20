@@ -4,8 +4,8 @@
 .data
 
 prompt:		.asciiz "Input characters:\n"
-original:	.asciiz "Original linked list\n"
-reversed:	.asciiz "reversed linked list\n"
+original:	.asciiz "\nOriginal linked list\n"
+reversed:	.asciiz "\nreversed linked list\n"
 
 .text
 #There are no real limit as to what you can use
@@ -17,10 +17,16 @@ reversed:	.asciiz "reversed linked list\n"
 
 main:
 #build a linked list
-	jal build
+	jal build		# Build list
+	add $s0, $zero, $v1	# Move returned head address into $s0
 
 #print "Original linked list\n"
+	li $v0, 4
+	la $a0, original
+	syscall
 #print the original linked list
+	add $a0, $zero, $s0	# Move head address into $a0 for print
+	jal print
 
 #reverse the linked list
 #On a new line, print "reversed linked list\n"
@@ -42,7 +48,8 @@ build:
 	la $a0, prompt
 	syscall
 	
-Head:	li $v0, 12		# Read a character
+#FOR EACH user inputted character inG, create a new node that hold's inG AND an address for the next node
+Head:	li $v0, 12		# Read first character
 	syscall
 	
 	beq $v0, 42, Done1	# Stop if *
@@ -54,7 +61,8 @@ Head:	li $v0, 12		# Read a character
 	jal malloc
 	add $ra, $zero, $t2	# Restore $ra
 	add $t1, $zero, $v0	# Move result adress of new node head to $t1
-	add $s0, $zero, $v0	# Move result adress of new node head to $s0
+	add $s0, $zero, $t1	# Move result adress of new node head to $s0
+	sb $t0, 0($t1)		# Store first character into head node
 	
 Tail:	li $v0, 12		# Read a character
 	syscall
@@ -73,21 +81,39 @@ Tail:	li $v0, 12		# Read a character
 	sb $t0, 0($t1)		# Store character into new node
 	sw $zero, 4($t1)	# Point new node's next address to null
 	
-	li $v0, 11		# DEBUG
-	lb $a0, 0($t1)		# DEBUG
-	syscall			# DEBUG
-	
 	j Tail			# Loop
 	
-#FOR EACH user inputted character inG, create a new node that hold's inG AND an address for the next node
 #at the end of build, return the address of the first node to $v1
 
-Done1:	add $v0, $zero, $s0	# Return head address
+Done1:	add $v1, $zero, $s0	# Return head address with $v1
 	jr $ra
 
 print:
 #$a0 takes the address of the first node
+First1:	add $t1, $zero, $a0	# Move head address into $t1
+	lb $t0, 0($t1)		# Load character into $t0
+	
+	li $v0, 11		# Print character
+	add $a0, $zero, $t0	# inside $t0
+	syscall
+	
+	lw $t2, 4($t1)		# Load adress of next node into $t2
+	add $t1, $zero, $t2	# Move address of next node back into $t1
+	
 #prints the contents of each node in order
+Rest1:	lb $t0, 0($t1)		# Load character into $t0
+	li $v0, 11		# Print character
+	add $a0, $zero, $t0
+	syscall
+	
+	lw $t2, 4($t1)		# Load adress of next node into $t2
+	add $t1, $zero, $t2	# Move address of next node back into $t1
+	
+	beq $t1, $zero, Done2	# Finish if reached end of list
+	
+	j Rest1			# else loop
+	
+Done2:	jr $ra
 
 reverse:
 #$a1 takes the address of the first node of a linked list
