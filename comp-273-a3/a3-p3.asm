@@ -5,9 +5,9 @@
 # Numerical Integration with the Floating Point Coprocessor
 ###########################################################
 .data
-N: .word 1000
-a: .float 100
-b: .float 200
+N: .word 100
+a: .float 0
+b: .float 1
 error: .asciiz "error: must have low < hi\n"
 
 .text 
@@ -43,15 +43,18 @@ integrate:
 	cvt.s.w $f4,$f4
 	sub.s $f6,$f13,$f12	# Put b-a into $f6 temp reg
 	div.s $f20,$f6,$f4	# Put delta(x)=(b-a)/N into $f20
+	
 	mtc1 $zero,$f22		# Set i counter to 0
 	mtc1 $zero,$f28		# Set sum to 0 in $f28
 	mov.s $f24,$f4		# Save N into $f24
 	mov.s $f26,$f12		# Save starting x_i (x_0 = a) into $f26
+	
 	addi $t0,$zero,2	# Get 2 to divide by 2
 	mtc1 $t0,$f6		# Move to float processors
 	cvt.s.w $f6,$f6		# Convert to float
 	div.s $f6,$f20,$f6	# Divide D(x) by 2 and put into $f6
 	add.s $f26,$f26,$f6	# x_i + D(x)/2
+	
 	addi $t0,$zero,1	# Get 1 to increment
 	mtc1 $t0,$f6		# Move to float processors
 	cvt.s.w $f30,$f6	# Convert to float and put in $f30
