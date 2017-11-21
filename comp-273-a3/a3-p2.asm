@@ -63,25 +63,24 @@ Nis0:	bne $t1,0,Ngt0		# Else if n != 0 then go to Ngt0 instead
 	
 	j RecEnd		# Keep returning from recursive calls
 
-Ngt0:	bne $t1,0,Ngt0		# Else if not n > 0 then End
+Ngt0:	blt $t1,0,End		# Else if not n > 0 then End
 	
 	add $a0,$t0,$zero	# $a0 is m
 	addi $a1,$t1,-1		# $a1 is n - 1
-	#add $s0,$v0,$zero	# Save current $v0 (necessary??)
 	jal A			# Recursive call
 	
 	add $t2,$v0,$zero	# Move result into $t2
-	lw $v0,8($sp)		# Restore $v0
+	#lw $v0,8($sp)		# Restore $v0 from stack
 	lw $t0,0($sp)		# Get current m back into $t0 from stack
 	addi $a0,$t0,-1		# $a0 is m - 1
 	add $a1,$t2,$zero	# $a1 is $t2
 	jal A			# Recursive call
 	
-RecEnd:	lw $ra,0($sp)		# Load m from stack
-	lw $ra,4($sp)		# Load n from stack
+RecEnd:	#lw $t0,0($sp)		# Load m from stack
+	#lw $t1,4($sp)		# Load n from stack
 	#lw $v0,8($sp)		# Load $v0 from stack
 	lw $ra,12($sp)		# Load $ra from stack
-	addi $sp,$sp,12		# Move stack pointer back down
+	addi $sp,$sp,16		# Move stack pointer back down
 	
 End:	#jal check
 	jr $ra			# Result in $v0
