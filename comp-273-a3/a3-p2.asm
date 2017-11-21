@@ -20,7 +20,7 @@ main:
 # computes Ackermann function
 A: 
 	add $t0,$a0,$zero	# Put "m" into $t0
-	add $t1,$a1,$zero	# "n" into $t1
+	add $t1,$a1,$zero	# Put "n" into $t1
 	
 Base:	beq $t0,0,End		# If m = 0 go to return
 	blt $t0,0,End		# If m < 0 go to return (just in case)
@@ -32,13 +32,23 @@ Mgt0:	addi $sp,$sp,-12	# Add space on stack for 3 words
 	
 Nis0:	bne $t1,0,Ngt0		# Else if n != 0 then go to Ngt0 instead
 	
-	sub $a0,$t0,$t1		# $a1 is already "n" and new $a0 is now "m-n"
-	jal gcd			# Recursive call
+	addi $a0,$t0,-1		# $a0 is now "m - 1"
+	addi $a1,$zero,1	# $a1 is 1
+	jal A			# Recursive call
 	
-	j RecEnd		# Jump to pop stack and End
+	j RecEnd		# Keep returning from recursive calls
 
-Ngt0:	sub $a1,$t1,$t0		# $a0 is already "m" and new $a1 is now "n-m"
-	jal gcd			# Recursive call
+Ngt0:	bne $t1,0,Ngt0		# Else if not n > 0 then End
+	
+	add $a0,$t0,$zero	# $a0 is m
+	addi $a1,$t1,-1		# $a1 is n - 1
+	jal A			# Recursive call
+	
+	add $t2,$v0,$zero	# Move result into $t2
+	lw $t0,0($sp)		# Get current m back into $t0 from stack
+	addi $a0,$t0,-1		# $a0 is m - 1
+	addi $a1,$t2,$zero	# $a1 is $t2
+	jal A			# Recursive call
 	
 RecEnd:	lw $ra,0($sp)		# Load $ra from stack
 	addi $sp,$sp,4		# Move stack pointer back
