@@ -27,9 +27,9 @@ main:
 #print the original linked list
 	add $a0, $zero, $s0	# Move head address into $a0 for print
 	jal print
-j End
+
 #reverse the linked list
-	add $s0, $zero, $a1	# Pass head address as argument to reverse
+	add $a1, $zero, $s0	# Pass head address as argument to reverse
 	jal reverse
 	add $s0, $zero, $v1	# Store returned address of reversed head into $s0
 	
