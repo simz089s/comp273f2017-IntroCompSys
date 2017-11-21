@@ -27,7 +27,7 @@ main:
 #print the original linked list
 	add $a0, $zero, $s0	# Move head address into $a0 for print
 	jal print
-
+j End
 #reverse the linked list
 	add $s0, $zero, $a1	# Pass head address as argument to reverse
 	jal reverse
@@ -51,7 +51,7 @@ malloc:
 	li $v0, 9	# Malloc num of bytes already in $a0
 	syscall
 	
-	jr $ra
+	jr $ra		# Address in $v0
 
 build:
 #continually ask for user input UNTIL user inputs "*"
@@ -60,39 +60,39 @@ build:
 	syscall
 	
 #FOR EACH user inputted character inG, create a new node that hold's inG AND an address for the next node
-Head:	li $v0, 12		# Read first character
+Head1:	li $v0, 12		# Read first character
 	syscall
 	
 	beq $v0, 42, Done1	# Stop if *
 	
-	add $t0, $zero, $v0	# Store character in $t0
+	add $s1, $zero, $v0	# Save character into $s1 (Storing things in $s because of jal malloc)
 	
-	add $t2, $zero, $ra	# Save $ra
-	li $a0, 5		# 1 byte for character and 4 bytes for address of next node
+	add $s2, $zero, $ra	# Save $ra
+	li $a0, 8		# 4 bytes for 1 byte character (offset must be word multiples it seems) and 4 bytes for address of next node
 	jal malloc
-	add $ra, $zero, $t2	# Restore $ra
-	add $t1, $zero, $v0	# Move result adress of new node head to $t1
-	add $s0, $zero, $t1	# Move result adress of new node head to $s0
-	sb $t0, 0($t1)		# Store first character into head node
+	add $ra, $zero, $s2	# Restore $ra
+	add $s0, $zero, $v0	# Move result adress of new head node to $s0
+	add $s3, $zero, $v0	# Move result adress of new head node to $s3
+	sb $s1, 0($s3)		# Store first character into head node
 	
-Tail:	li $v0, 12		# Read a character
+Tail1:	li $v0, 12		# Read a character
 	syscall
 	
 	beq $v0, 42, Done1	# Stop if *
 	
-	add $t0, $zero, $v0	# Store character in $t0
+	add $s1, $zero, $v0	# Save character into $s1
 	
-	add $t2, $zero, $ra	# Save $ra
-	li $a0, 5		# 1 byte for character and 4 bytes for address of next node
+	add $s2, $zero, $ra	# Save $ra
+	li $a0, 8		# 4 bytes for character and 4 bytes for address of next node
 	jal malloc
-	add $ra, $zero, $t2	# Restore $ra
+	add $ra, $zero, $s2	# Restore $ra
 	
-	sw $v0, 4($t1)		# Point previous node's next address to new node
-	add $t1, $zero, $v0	# Move adress of new node to $t1
-	sb $t0, 0($t1)		# Store character into new node
-	sw $zero, 4($t1)	# Point new node's next address to null
+	sw $v0, 4($s3)		# Point previous node's next address to new node
+	add $s3, $zero, $v0	# Move adress of new node to $s3 (new next node becomes current node)
+	sb $s1, 0($s3)		# Store character into new node
+	sw $zero, 4($s3)	# Point new node's next address to null
 	
-	j Tail			# Loop
+	j Tail1			# Loop
 	
 #at the end of build, return the address of the first node to $v1
 
@@ -103,28 +103,18 @@ Done1:	add $v1, $zero, $s0	# Return head address with $v1
 
 print:
 #$a0 takes the address of the first node
-First1:	add $t1, $zero, $a0	# Move head address into $t1
-	lb $t0, 0($t1)		# Load character into $t0
-	
-	li $v0, 11		# Print character
-	add $a0, $zero, $t0	# inside $t0
-	syscall
-	
-	lw $t2, 4($t1)		# Load adress of next node into $t2
-	add $t1, $zero, $t2	# Move address of next node back into $t1
+Head2:	add $t1, $zero, $a0	# Move head address into $t1
 	
 #prints the contents of each node in order
-Rest1:	lb $t0, 0($t1)		# Load character into $t0
+Tail2:	lb $t0, 0($t1)		# Load character into $t0
 	li $v0, 11		# Print character
-	add $a0, $zero, $t0
+	add $a0, $zero, $t0	# in $t0
 	syscall
 	
 	lw $t2, 4($t1)		# Load adress of next node into $t2
 	add $t1, $zero, $t2	# Move address of next node back into $t1
 	
-	beq $t1, $zero, Done2	# Finish if reached end of list
-	
-	j Rest1			# else loop
+	bne $t1, $zero, Tail2	# Loop if next node not null else finish
 	
 Done2:	jr $ra
 
