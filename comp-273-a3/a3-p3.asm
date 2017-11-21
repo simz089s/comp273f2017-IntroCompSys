@@ -21,7 +21,7 @@ main:
 	jal integrate
 	# print result and exit with status 0
 	li $v0,2
-	#lw $f12,$f12
+	#mov.s $f0,$f0
 	syscall
 	li $v0,17		# Exit 0
 	xor $a0,$a0,$a0
@@ -35,11 +35,31 @@ main:
 integrate: 
 	add $s0,$ra,$zero	# Save return address
 	jal check
-	add $ra,$s0,$zero	# Restore return address
 	
 	# initialize $f4 to hold N
 	# since N is declared as a word, will need to convert 
+	l.s $f4,N
+	cvt.s.w $f4,$f4
+	sub.s $f6,$f13,$f12	# Put b-a into $f6 temp reg
+	div.s $f20,$f6,$f4	# Put delta(x)=(b-a)/N into $f20
+	mtc1 $zero,$f22		# Set i counter to 0
+	mov.s $f24,$f12		# Save a into $f24
+	mov.s $f26,$f4		# Save N into $f24
 	
+Loop:	c.eq.s $f24,$f26	# Check if i = N
+	bc1t Done		# Finish if i = N
+	
+	# Calculate midpoint D(x)/2+(a+x_0?) and then just keep adding D(x) (is counter i even needed?)
+	#mul.s $f6,$f22,$f20	# Calculate x_i into $f6 (i * D(x))
+	#add.s $f6,$f24,$f6	# a + i * D(x)
+	#add.s $f22,$f22,1	# Increment i
+	#mul.s $f8,$f22,$f20	# Calculate x_i+1 into $f8 (i * D(x))
+	#add.s $f8,$f24,$f6	# a + i * D(x)
+	#sub.s $f10,$f8
+	jalr $a0		# Jump to function
+	
+	
+Done:	add $ra,$s0,$zero	# Restore return address
 	jr $ra
 
 ###########################################################
