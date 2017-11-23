@@ -65,38 +65,43 @@ Head1:	li $v0, 12		# Read first character
 	
 	beq $v0, 42, Done1	# Stop if *
 	
-	add $s1, $zero, $v0	# Save character into $s1 (Storing things in $s because of jal malloc)
+	addi $sp, $sp, 16	# Move stack pointer to reserve space for three words: $ra, the head node, and then for each node the address and character
+	sb $v0, 0($sp)		# Store character on stack
+	sw $ra, 12($sp)		# Store $ra on stack
 	
-	add $s2, $zero, $ra	# Save $ra
 	li $a0, 8		# 4 bytes for 1 byte character (offset must be word multiples it seems) and 4 bytes for address of next node
 	jal malloc
-	add $ra, $zero, $s2	# Restore $ra
-	add $s0, $zero, $v0	# Move result adress of new head node to $s0
-	add $s3, $zero, $v0	# Move result adress of new head node to $s3
-	sb $s1, 0($s3)		# Store first character into head node
+	#lw $ra, 12($sp)		# Restore $ra
+	sw $v0, 8($sp)		# Store result adress of new head node to stack
+	sw $v0, 4($sp)		# Store result adress of new head node as previous node to stack
+	sw $zero, 4($v0)	# Point next address to null
+	lb $t0, 0($sp)		# Get first character from stack into $t0
+	sb $t0, 0($v0)		# Store first character into head node
 	
 Tail1:	li $v0, 12		# Read a character
 	syscall
 	
 	beq $v0, 42, Done1	# Stop if *
 	
-	add $s1, $zero, $v0	# Save character into $s1
+	sb $v0, 0($sp)		# Store character on stack (reusing stack frame)
 	
-	add $s2, $zero, $ra	# Save $ra
 	li $a0, 8		# 4 bytes for character and 4 bytes for address of next node
 	jal malloc
-	add $ra, $zero, $s2	# Restore $ra
-	
-	sw $v0, 4($s3)		# Point previous node's next address to new node
-	add $s3, $zero, $v0	# Move adress of new node to $s3 (new next node becomes current node)
-	sb $s1, 0($s3)		# Store character into new node
-	sw $zero, 4($s3)	# Point new node's next address to null
+	#add $ra, $zero, $s2	# Restore $ra
+	lw $t1, 4($sp)		# Restore previous node's address to $t1
+	sw $v0, 4($t1)		# Point previous node's next address to new node
+	lb $t0, 0($sp)		# Get character from stack into $t0
+	sb $t0, 0($v0)		# Store character into new node
+	sw $zero, 4($v0)	# Point new node's next address to null
+	sw $v0, 4($sp)		# Store adress of new node to stack (over previous node so new node becomes previous node in next iteration)
 	
 	j Tail1			# Loop
 	
 #at the end of build, return the address of the first node to $v1
 
-Done1:	add $v1, $zero, $s0	# Return head address with $v1
+Done1:	lw $ra, 12($sp)		# Restore $ra from stack
+	lw $v1, 8($sp)		# Restore head address from stack into $v1 to return
+	addi $sp, $sp, -16	# Move stack pointer back to free space
 	jr $ra
 	
 ###############################################################################
@@ -106,13 +111,12 @@ print:
 Head2:	add $t1, $zero, $a0	# Move head address into $t1
 	
 #prints the contents of each node in order
-Tail2:	lb $t0, 0($t1)		# Load character into $t0
+Tail2:	lb $a0, 0($t1)		# Load character into $a0 to print
 	li $v0, 11		# Print character
-	add $a0, $zero, $t0	# in $t0
 	syscall
 	
-	lw $t2, 4($t1)		# Load adress of next node into $t2
-	add $t1, $zero, $t2	# Move address of next node back into $t1
+	lw $t1, 4($t1)		# Load adress of next node into $t1
+	#add $t1, $zero, $t2	# Move address of next node back into $t1
 	
 	bne $t1, $zero, Tail2	# Loop if next node not null else finish
 	
