@@ -31,7 +31,7 @@ main:	la $a0,str1		#readfile takes $a0 as input
 readfile:
 
 #Open the file to be read,using $a0
-	li $v0, 13		# syscall to open file
+	li $v0, 13		# syscall to open file (path already in $a0)
 	li $a1, 0		# Flag to read file
 	syscall
 	move $t0, $v0		# Copy file descriptor to $t0
@@ -39,6 +39,8 @@ readfile:
 	bge $t0, $zero, Read1	# Error if FD < 0 else go to read file
 	li $v0, 4		# Print error message
 	la $a0, error
+	syscall
+	li $v0,10		# Exit
 	syscall
 
 # You will want to keep track of the file descriptor*
@@ -54,20 +56,25 @@ Read1:	li $v0, 14		# syscall to read file
 	li $a2, 2048		# Buffer size for max chars
 	syscall
 	
-	bge $t0, $zero, Close1	# Error if FD < 0 else go to close file
+	bge $v0, $zero, Close1	# Error if # chars read < 0 else go to close file
 	li $v0, 4		# Print error message
 	la $a0, error
+	syscall
+	li $v0,10		# Exit
 	syscall
 
 # address of the ascii string you just read is returned in $v1.
 # the text of the string is in buffer
 # close the file (make sure to check for errors)
 
-Close1:	li   $v0, 16		# syscall to close file
+Close1:	move $t1, $v0		# Copy # chars read to $t1
+	li   $v0, 16		# syscall to close file
 	move $a0, $t0		# Pass file descriptor
 	syscall
 	
+	move $v0, $t1		# Copy back # chars read to return
 	la $v1, buffer		# Return string address
+	jr $ra
 
 ################################################################################
 
