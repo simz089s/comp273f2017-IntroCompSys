@@ -97,13 +97,13 @@ blur:
 R2Array:xor $t4, $t4, $t4	# Zero out $t4 to be used as running sum per int
 	xor $t5, $t5, $t5	# $t5 for int count
 	
-Loop3:	la $t7, $t1		# Put char of buff into $t7
+Loop3:	lb $t7, 0($t1)		# Put char of buff into $t7
 	blt $t7, 48, NaN	# Branch if not in range of number ASCII
 	bgt $t7, 57, NaN
 #	beq $t7, 0, Avg		# Branch if null
-	beq $t5, 168, Avg	# Go to average when read everything into array
+NumL:	beq $t5, 168, Avg	# Go to average when read everything into array
 	
-NumL:	addi $t7, $t7, -48	# Convert ASCII digit to int digit
+	addi $t7, $t7, -48	# Convert ASCII digit to int digit
 	mul $t4, $t4, $t7	# Multiply running sum by 10 for positional notation trick
 	add $t4, $t4, $t7	# Add digit as unit to running sum
 	
@@ -115,11 +115,11 @@ NaN:	sw $t4, 0($t3)		# Hit NaN char which separates ints so put previous running
 	addi $t5, $t5, 1	# Increment int count $t5 for new number found
 	xor $t4, $t4, $t4	# Reset running sum $t4
 NaNL:	addi $t1, $t1, 1	# Increment buffer pointer
-	la $t7, $t1		# Put char of buffer pointer into $t7
+	lb $t7, 0($t1)		# Put char of buffer pointer into $t7
 	blt $t7, 48, NaNL	# Loop if still not number ASCII
 	bgt $t7, 57, NaNL
 	
-	j NumL
+	j NumL			# Go back to main loop
 	
 Avg:	
 	
