@@ -104,15 +104,15 @@ Loop3:	la $t7, $t1		# Put char of buff into $t7
 	beq $t5, 168, Avg	# Go to average when read everything into array
 	
 NumL:	addi $t7, $t7, -48	# Convert ASCII digit to int digit
-	mul $t4, $t4, $t7	# Multiply running sum by 10 for position trick
+	mul $t4, $t4, $t7	# Multiply running sum by 10 for positional notation trick
 	add $t4, $t4, $t7	# Add digit as unit to running sum
 	
 Incr:	addi $t1, $t1, 1	# Increment buffer pointer
 	j Loop3			# Jump to loop
 	
-NaN:	sw $t4, 0($t2)		# Hit NaN char which separates ints so put previous running sum int into array
+NaN:	sw $t4, 0($t3)		# Hit NaN char which separates ints so put previous running sum int into array
 	addi $t3, $t3, 1	# Increment array pointer
-	addi $t5, $t5, 1	# Increment int count $t5 if new number found
+	addi $t5, $t5, 1	# Increment int count $t5 for new number found
 	xor $t4, $t4, $t4	# Reset running sum $t4
 NaNL:	addi $t1, $t1, 1	# Increment buffer pointer
 	la $t7, $t1		# Put char of buffer pointer into $t7
