@@ -20,7 +20,7 @@ header:	.ascii "P2\n24 7\n15\n"
 main:	la $a0,str1		#readfile takes $a0 as input
 	jal readfile
 	
-	move $s0, $v0		# Save # chars read to $s0
+#	move $s0, $v0		# Save # chars read to $s0
 
 	la $a0, str3		#writefile will take $a0 as file location
 	la $a1,buffer		#$a1 takes location of what we wish to write.
@@ -90,7 +90,7 @@ End1:	move $v0, $t1		# Copy back # chars read to return
 
 writefile:
 #open file to be written to, using $a0.
-	move $t1, $s0		# Copy # chars read to $t1 again
+#	move $t1, $s0		# Copy # chars read to $t1 again
 	move $t2, $a1		# Copy buffer address to $t2
 	
 	li $v0, 13		# syscall to open file (path already in $a0)
@@ -117,7 +117,7 @@ Write2:	li $v0, 15		# syscall to write file
 	li $v0, 15		# syscall to write file
 	move $a0, $t0		# Pass file descriptor
 	la $a1, buffer		# Write from buffer address
-	li $a2, 2048		# Buffer size
+	li $a2, 2048		# Buffer size for max # chars to write
 	syscall
 	
 	bge $v0, $zero, Close2	# Error if # chars written < 0 else go to close file
