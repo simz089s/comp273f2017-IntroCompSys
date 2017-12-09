@@ -4,11 +4,13 @@
 #Must use accurate file path.
 #These file paths are EXAMPLES, 
 #should not work for you
-str1:	.asciiz "/home/simon/COMP/COMP273/comp273f2017simz/Assignment4/test1.txt"
+str1:	.asciiz "C:/Users/Simon/Desktop/Prog/COMP 273/comp273f2017simz/Assignment4/test1.txt"
 str3:	.asciiz "test-blur.pgm"	#used as output
 
 buffer:  .space 2048		# buffer for upto 2048 bytes
 newbuff: .space 2048
+
+.align 2			# Align to word
 
 array:	.space 672		# 672 bytes = 168 words = 24*7 integers
 
@@ -92,29 +94,30 @@ blur:
 	
 	move $t1, $a1		# Copy buffer address to $t1
 	move $t2, $a2		# Copy newbuff address to $t2
-	lw $t3, array		# Load array address to $t3
+	la $t3, array		# Load array address to $t3
 	
 R2Array:xor $t4, $t4, $t4	# Zero out $t4 to be used as running sum per int
 	xor $t5, $t5, $t5	# $t5 for int count
 	
 Loop3:	lb $t7, 0($t1)		# Put char of buff into $t7
-	blt $t7, 48, NaN	# Branch if not in range of number ASCII
-	bgt $t7, 57, NaN
+	blt $t7, 48, NotNum	# Branch if not in range of number ASCII
+	bgt $t7, 57, NotNum
 #	beq $t7, 0, Avg		# Branch if null
 NumL:	beq $t5, 168, Avg	# Go to average when read everything into array
 	
 	addi $t7, $t7, -48	# Convert ASCII digit to int digit
-	mul $t4, $t4, $t7	# Multiply running sum by 10 for positional notation trick
+	mul $t4, $t4, 10	# Multiply running sum by 10 for positional notation trick
 	add $t4, $t4, $t7	# Add digit as unit to running sum
 	
 Incr:	addi $t1, $t1, 1	# Increment buffer pointer
 	j Loop3			# Jump to loop
 	
-NaN:	sw $t4, 0($t3)		# Hit NaN char which separates ints so put previous running sum int into array
-	addi $t3, $t3, 1	# Increment array pointer
+NotNum:	sw $t4, 0($t3)		# Hit non numeral char which separates ints so put previous running sum int into array
+	addi $t3, $t3, 4	# Increment array pointer (aligned by word)
 	addi $t5, $t5, 1	# Increment int count $t5 for new number found
 	xor $t4, $t4, $t4	# Reset running sum $t4
-NaNL:	addi $t1, $t1, 1	# Increment buffer pointer
+NaNL:	beq $t5, 168, Avg	# Go to average when read everything into array
+	addi $t1, $t1, 1	# Increment buffer pointer (by a char byte)
 	lb $t7, 0($t1)		# Put char of buffer pointer into $t7
 	blt $t7, 48, NaNL	# Loop if still not number ASCII
 	bgt $t7, 57, NaNL
