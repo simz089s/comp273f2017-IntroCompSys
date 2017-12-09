@@ -12,7 +12,8 @@ newbuff: .space 2048
 
 .align 2			# Align to word
 
-array:	.space 672		# 672 bytes = 168 words = 24*7 integers
+iarray:	.space 672		# 672 bytes = 168 words = 24*7 integers
+oarray:	.space 672		# Averaged array
 
 error:	.asciiz "File I/O error\n"
 header:	.ascii "P2\n24 7\n15\n"
@@ -92,9 +93,12 @@ blur:
 #we will return the address of our
 #blurred 2D array in #v1
 	
+	addi $sp, $sp, 8	# Add space on stack to put buffers addresses
+	sw $a1, 0($sp)		# Store buffer address on stack
+	sw $a2, 4($sp)		# Store newbuff address on stack
+	
 	move $t1, $a1		# Copy buffer address to $t1
-	move $t2, $a2		# Copy newbuff address to $t2
-	la $t3, array		# Load array address to $t3
+	la $t3, iarray		# Load array address to $t3
 	
 R2Array:xor $t4, $t4, $t4	# Zero out $t4 to be used as running sum per int
 	xor $t5, $t5, $t5	# $t5 for int count
@@ -124,7 +128,10 @@ NaNL:	beq $t5, 168, Avg	# Go to average when read everything into array
 	
 	j NumL			# Go back to main loop
 	
-Avg:	
+Avg:	xor $t5, $t5, $t5	# Reset $t5 for column count
+	xor $t6, $t6, $t6	# $t6 for row count
+	la $t2, oarray		# Load averaged array address to $t2
+	la $t3, iarray		# Reload initial array to reset pointer $t3
 	
 End3:	jr $ra
 
