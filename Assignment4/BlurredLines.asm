@@ -133,7 +133,7 @@ Avg:	xor $t5, $t5, $t5	# Reset $t5 for column count
 	la $t2, oarray		# Load averaged array address to $t2
 	la $t3, iarray		# Reload initial array to reset pointer $t3
 	
-FstRow:	bge $t5, 24, SndRow	# First row edge case
+FstRow:	bge $t5, 24, NxtRow	# First row edge case
 	lw $t0, 0($t3)		# Load iarray val to $t0
 	sw $t0, 0($t2)		# Store in oarray
 	addi $t3, $t3, 4	# Incr iarray pointer $t3
@@ -141,8 +141,10 @@ FstRow:	bge $t5, 24, SndRow	# First row edge case
 	addi $t5, $t5, 1	# Incr $t5 col cnt by 1
 	j FstRow
 	
-SndRow:	addi $t6, $t6, 1	# Incr row count
+NxtRow:	addi $t6, $t6, 1	# Incr row count
 	xor $t5, $t5, $t5	# Reset $t5 for column count
+	
+	bge $t6, 6, LstRow	# Last row edge case
 	
 LEdge:	lw $t0, 0($t3)		# Load iarray val to $t0
 	sw $t0, 0($t2)		# Store in oarray
@@ -150,7 +152,9 @@ LEdge:	lw $t0, 0($t3)		# Load iarray val to $t0
 	addi $t2, $t2, 4	# Incr oarray pointer $t2
 	addi $t5, $t5, 1	# Incr $t5 col cnt by 1
 	
-Middle:	lw $t0, 0($t3)		# Load iarray val to $t0
+Middle:	bge $t5, 23, REdge	# Go to right edge case if at 23rd column
+	
+	lw $t0, 0($t3)		# Load iarray val to $t0
 	mtc1 $t0, $f18		# $f18 as running average calculation
 	cvt.s.w $f18, $f18	# Convert to single float
 	
@@ -200,6 +204,21 @@ Middle:	lw $t0, 0($t3)		# Load iarray val to $t0
 	div.s $f18, $f18, $f4	# Complete average calculation by dividing
 	cvt.w.s $f18, $f18	# Convert back to int
 	mfc1 $t7, $f18		# Move average to $t7
+	sw $t7, 0($t2)		# Store in oarray
+	
+	addi $t3, $t3, 4	# Incr iarray pointer $t3
+	addi $t2, $t2, 4	# Incr oarray pointer $t2
+	addi $t5, $t5, 1	# Incr $t5 col cnt by 1
+	j Middle
+	
+REdge:	lw $t0, 0($t3)		# Load iarray val to $t0
+	sw $t0, 0($t2)		# Store in oarray
+	addi $t3, $t3, 4	# Incr iarray pointer $t3
+	addi $t2, $t2, 4	# Incr oarray pointer $t2
+	
+	j NxtRow		# Go to next row
+	
+LstRow:	
 	
 End3:	jr $ra
 
