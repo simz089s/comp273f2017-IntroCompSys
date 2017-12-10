@@ -226,9 +226,50 @@ LstRow:	bge $t5, 24, W2Buff	# Last row edge case
 	addi $t5, $t5, 1	# Incr $t5 col cnt by 1
 	j LstRow
 	
-W2Buff:	
+W2Buff:	la $t2, oarray		# Reset oarray pointer $t2
+	la $t1, 4($sp)		# Load newbuff address to $t1
+	move $t5, $zero		# Reset column count to 0
+	move $t6, $zero		# Reset row count to 0
 	
-End3:	jr $ra
+	addi $sp, $sp, 4	# Add space for a number
+	li $t0, -1
+	sw $t0, 0($sp)		# Store mark as -1
+	
+CvtNum:	lw $t4, 0($t2)		# Load number from oarray to $t4
+	
+	div $t4, 10		# Do reminder trick to convert to ASCII
+	mflo $t4
+	mfhi $t0		# Move remainder to $t0
+	addi $t0, $t0, 48	# Convert int digit to ASCII
+	addi $sp, $sp, 4	# Add space for a number
+	sb $t0, 0($sp)		# Store char byte on stack
+	
+InNum:	div $t4, 10		# Do reminder trick to convert to ASCII
+	mflo $t4
+	beq $t4, $zero, S2Buff	# When finished a number
+	mfhi $t0		# Move remainder to $t0
+	addi $t0, $t0, 48	# Convert int digit to ASCII
+	addi $sp, $sp, 4	# Add space for a number
+	sb $t0, 0($sp)		# Store char byte on stack
+	j InNum
+	
+S2Buff:	lw $t0, 0($sp)		# Check for -1 mark
+	beq $t0, -1, FinNum
+	
+	lb $t0, 0($sp)		# Put char byte into newbuff and incr its ptr and move $sp
+	sb $t0, 0($t1)
+	addi $t1, $t1, 1
+	addi $sp, $sp, -4
+	j S2Buff
+	
+	
+FinNum:	li $t0, 32		# Load space ASCII to $t0
+	sb $t0, 0($t1)		# Put space in newbuff
+	addi $t1, $t1, 1	# Incr newbuff ptr
+	j CvtNum
+	
+End3:	# Move stack pointer back (2 buff addresses + -1 mark)
+	jr $ra
 
 ################################################################################
 
