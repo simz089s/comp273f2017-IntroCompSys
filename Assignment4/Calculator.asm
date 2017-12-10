@@ -6,9 +6,21 @@
 
 #Have fun!
 
+.data
+
+buffer:  .space 2048		# buffer for upto 2048 bytes
+
+IniPrmpt:.asciiz "Calculator for MIPS\npress ’c’ for clear and ’q’ to quit:\n"
+
+	.text
+	.globl main
 
 #TODO:
 #main procedure, that will call your calculator
+
+main:	
+	li $v0, 10		# Exit
+	syscall
 
 #calculator procedure, that will deal with the input
 	#2 cases you must consider:

@@ -203,7 +203,7 @@ Middle:	bge $t5, 23, REdge	# Go to right edge case if at 23rd column
 	mtc1 $t7, $f4
 	cvt.s.w $f4, $f4
 	div.s $f18, $f18, $f4	# Complete average calculation by dividing
-	cvt.w.s $f18, $f18	# Convert back to int
+	round.w.s $f18, $f18	# Convert back to int
 	mfc1 $t7, $f18		# Move average to $t7
 	sw $t7, 0($t2)		# Store in oarray
 	
