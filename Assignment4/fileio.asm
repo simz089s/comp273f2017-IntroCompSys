@@ -5,7 +5,7 @@
 #Must use accurate file path.
 #These file paths are EXAMPLES, 
 #should not work for you
-str1:	.asciiz "/home/simon/COMP/COMP273/comp273f2017simz/Assignment4/test1.txt"
+str1:	.asciiz "C:/Users/Simon/Desktop/Prog/COMP 273/comp273f2017simz/Assignment4/test1.txt"
 str2:	.asciiz "/home/simon/COMP/COMP273/comp273f2017simz/Assignment4/test2.txt"
 str3:	.asciiz "test.pgm"	#used as output
 
@@ -116,7 +116,7 @@ Write2:	li $v0, 15		# syscall to write file
 #write the content stored at the address in $a1.
 	li $v0, 15		# syscall to write file
 	move $a0, $t0		# Pass file descriptor
-	la $a1, buffer		# Write from buffer address
+	move $a1, $t2		# Write from buffer address
 	li $a2, 2048		# Buffer size for max # chars to write
 	syscall
 	
