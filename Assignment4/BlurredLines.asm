@@ -158,42 +158,42 @@ Middle:	bge $t5, 23, REdge	# Go to right edge case if at 23rd column
 	mtc1 $t0, $f18		# $f18 as running average calculation
 	cvt.s.w $f18, $f18	# Convert to single float
 	
-	lw $t7, -25($t3)	# Get top left corner
+	lw $t7, -100($t3)	# Get top left corner (-25 words)
 	mtc1 $t7, $f4
 	cvt.s.w $f4, $f4
 	add.s $f18, $f18, $f4	# Add to running calc $f18
 	
-	lw $t7, -24($t3)	# Get top
+	lw $t7, -96($t3)	# Get top
 	mtc1 $t7, $f4
 	cvt.s.w $f4, $f4
 	add.s $f18, $f18, $f4	# Add to running calc $f18
 	
-	lw $t7, -23($t3)	# Get top right corner
+	lw $t7, -92($t3)	# Get top right corner
 	mtc1 $t7, $f4
 	cvt.s.w $f4, $f4
 	add.s $f18, $f18, $f4	# Add to running calc $f18
 	
-	lw $t7, -1($t3)		# Get left
+	lw $t7, -4($t3)		# Get left
 	mtc1 $t7, $f4
 	cvt.s.w $f4, $f4
 	add.s $f18, $f18, $f4	# Add to running calc $f18
 	
-	lw $t7, 1($t3)		# Get right
+	lw $t7, 4($t3)		# Get right
 	mtc1 $t7, $f4
 	cvt.s.w $f4, $f4
 	add.s $f18, $f18, $f4	# Add to running calc $f18
 	
-	lw $t7, 23($t3)		# Get bottom left corner
+	lw $t7, 92($t3)		# Get bottom left corner
 	mtc1 $t7, $f4
 	cvt.s.w $f4, $f4
 	add.s $f18, $f18, $f4	# Add to running calc $f18
 	
-	lw $t7, 24($t3)		# Get bottom
+	lw $t7, 96($t3)		# Get bottom
 	mtc1 $t7, $f4
 	cvt.s.w $f4, $f4
 	add.s $f18, $f18, $f4	# Add to running calc $f18
 	
-	lw $t7, 25($t3)		# Get bottom right corner
+	lw $t7, 100($t3)	# Get bottom right corner
 	mtc1 $t7, $f4
 	cvt.s.w $f4, $f4
 	add.s $f18, $f18, $f4	# Add to running calc $f18
@@ -218,7 +218,15 @@ REdge:	lw $t0, 0($t3)		# Load iarray val to $t0
 	
 	j NxtRow		# Go to next row
 	
-LstRow:	
+LstRow:	bge $t5, 24, W2Buff	# Last row edge case
+	lw $t0, 0($t3)		# Load iarray val to $t0
+	sw $t0, 0($t2)		# Store in oarray
+	addi $t3, $t3, 4	# Incr iarray pointer $t3
+	addi $t2, $t2, 4	# Incr oarray pointer $t2
+	addi $t5, $t5, 1	# Incr $t5 col cnt by 1
+	j LstRow
+	
+W2Buff:	
 	
 End3:	jr $ra
 
