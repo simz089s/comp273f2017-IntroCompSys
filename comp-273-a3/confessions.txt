@@ -1,0 +1,28 @@
+Q3 Floating point
+
+Registers used (registers in pairs) :
+
+### TEMPORARY OR UNUSED REGISTERS ###
+
+$f0-$f2 return registers
+
+$f4 left as N (but saved later anyway)
+$f6 used as temporary register
+$f8-$f10 unused temporary registers
+
+$f12-$f13 argument registers
+$f14 unused argument register
+
+$f16-$f18 unused temporary registers
+
+### SAVED REGISTERS ###
+
+$f20 delta x
+$f22 i counter
+$f24 N
+$f26 x_i
+$f28 total sum (cumulative)
+
+### ###
+
+Clarification in comments.

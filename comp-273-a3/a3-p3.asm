@@ -6,8 +6,8 @@
 ###########################################################
 .data
 N: .word 100
-a: .float 0
-b: .float 1
+a: .float -10346
+b: .float -1536
 error: .asciiz "error: must have low < hi\n"
 
 .text 
@@ -33,8 +33,9 @@ main:
 # $f12 gets low, $f13 gets hi, $a0 gets address (label) of func
 # $f0 gets return value
 integrate: 
-	add $s0,$ra,$zero	# Save return address
-	add $s1,$a0,$zero	# Save function address
+	addi $sp,$sp,8
+	sw $ra,4($sp)	# Save return address on stack
+	sw $a0,0($sp)	# Save function address on stack
 	jal check
 	
 	# initialize $f4 to hold N
@@ -64,7 +65,8 @@ Loop:	c.eq.s $f22,$f24	# Check if i = N
 	
 	# Calculate midpoint D(x)/2+(a+x_0?) and then just keep adding D(x) (is counter i even needed?)
 	mov.s $f12,$f26		# Calculate mid point of x_i
-	jalr $s1		# Jump to function
+	lw $t0,0($sp)		# Get function address form stack
+	jalr $t0		# Jump to function
 	mul.s $f6,$f20,$f0	# D(x) * f(x_i) into $f6
 	add.s $f28,$f28,$f6	# sum = sum + $f6
 	
@@ -73,7 +75,8 @@ Loop:	c.eq.s $f22,$f24	# Check if i = N
 	j Loop
 	
 Done:	mov.s $f0,$f28		# Return sum
-	add $ra,$s0,$zero	# Restore return address
+	lw $ra,4($sp)		# Restore return address from stack
+	addi $sp,$sp,-8		# Move back stack pointer
 	jr $ra
 
 ###########################################################
